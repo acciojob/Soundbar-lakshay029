@@ -1,44 +1,33 @@
-//your JS code here. If required.
-const sounds = [
-    "applause",
-    "boo",
-    "gasp",
-    "tada",
-    "victory",
-    "wrong"
-];
+const sounds = ["applause", "boo", "gasp", "tada", "victory", "wrong"];
 
-const buttonsContainer = document.getElementById("buttons");
-
-let currentAudio = null;
+const buttons = document.getElementById("buttons");
 
 sounds.forEach(sound => {
     const btn = document.createElement("button");
-    btn.classList.add("btn");
+    btn.className = "btn";
     btn.innerText = sound;
 
     btn.addEventListener("click", () => {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
+        document.querySelectorAll("audio").forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
 
-        currentAudio = new Audio(`sounds/${sound}.mp3`);
-        currentAudio.play();
+        document.getElementById(sound).play();
     });
 
-    buttonsContainer.appendChild(btn);
+    buttons.appendChild(btn);
 });
 
 const stopBtn = document.createElement("button");
-stopBtn.classList.add("stop");
-stopBtn.innerText = "Stop";
+stopBtn.className = "stop";
+stopBtn.innerText = "stop";
 
 stopBtn.addEventListener("click", () => {
-    if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-    }
+    document.querySelectorAll("audio").forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 });
 
-buttonsContainer.appendChild(stopBtn);
+buttons.appendChild(stopBtn);
